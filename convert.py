@@ -2,7 +2,7 @@ from absl import app, flags, logging
 from absl.flags import FLAGS
 import numpy as np
 from yolov3.models import YoloV3
-from yolov3.utils import load_darkent_weights
+from yolov3.utils import load_darknet_weights
 import tensorflow as tf
 
 flags.DEFINE_string('weights', './data/yolov3.wiegthts', 'path to weights file')
@@ -14,14 +14,14 @@ def main(_argv):
 	if len(physical_devices) > 0:
 		tf.config.experimental.set_memory_growth(physical_devices[0], True)
 
-	yolo = YoloV3(classes=FLAGS.classes)
+	yolo = YoloV3(classes=FLAGS.num_classes)
 	yolo.summary()
 	logging.info("model created")
 
-	load_darkent_weights(yolo, FLAGS.weights, False) # False for absence of yolo-TinY
+	load_darknet_weights(yolo, FLAGS.weights, False) # False for absence of yolo-TinY
 	logging.info("weights loaded")
 
-	img = np.random.random((1,320,3)).astype(np.float32)
+	img = np.random.random((1,320,320,3)).astype(np.float32)
 	output = yolo(img)
 	logging.info("sanity check passed")
 
@@ -33,5 +33,5 @@ def main(_argv):
 if __name__ == '__main__':
 	try:
 		app.run(main)
-	except:
+	except SystemExit:
 		pass
