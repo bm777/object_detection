@@ -62,6 +62,8 @@ def main(_argv):
 		
 		t1 = time.time()
 		boxes, scores, classes, nums = yolo.predict(img_in)
+		for i in num:
+			print(i)
 		t2 = time.time()
 		times.append(t2-t1)
 		times = times[-20:]
