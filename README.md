@@ -4,7 +4,9 @@ See on YouTube: [4K YoloV3 Object detection using Tensorflow 2.1](https://www.yo
 
 This repo provide a clean implementation of YoloV3 in Tensorflow 2.x using all the best practices.
 
-[![Instance Detection Sample](assets/Object_On_Frame.jpg)
+![Instance Detection Sample](assets/Object_On_Frame.jpg)
+
+
 ## Key Features
 
 - [x] TensorFlow 2.1
