@@ -79,7 +79,7 @@ soon
 Great addition for existing Tensorflow experts.
 
 It is annoying when you accidentally use incompatible feature like
-tf.config.experimental.set_memory_growth(devices[0], True) or some sort of python 
+`tf.config.experimental.set_memory_growth(devices[0], True)` or some sort of python 
 control flow that works fine eager mode.
 
 ### models(x) vs model.predict(x)
