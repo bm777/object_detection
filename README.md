@@ -1,3 +1,6 @@
+## Average Time Elapsed for process on each frame: 71.6ms 
+
+
 # YoloV3 Implementation in Tensorflow 2.x
 
 See on YouTube: [4K YoloV3 Object detection using Tensorflow 2.1](https://www.youtube.com/watch?v=2Xc9oj2qMRc)
