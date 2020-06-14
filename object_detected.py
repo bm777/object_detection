@@ -4,6 +4,7 @@ from absl.flags import FLAGS
 import cv2
 import tensorflow as tf
 from yolov3.models import YoloV3
+import tensorflow
 
 
 from yolov3.dataset import transform_images #for image processing
@@ -19,9 +20,6 @@ flags.DEFINE_string('output_format', 'XVID', 'codec used in VideoWriter when sav
 flags.DEFINE_integer('num_classes', 80, 'number of classes in the model')
 
 def main(_argv):
-	physical_devices = tf.config.experimental.list_physical_devices('GPU')
-	for physical_device in physical_devices:
-		tf.config.experimental.set_memory_growth(physical_device, True)
 
 	# import weights
 	yolo = YoloV3(classes=FLAGS.num_classes)
@@ -83,7 +81,14 @@ def main(_argv):
 
 # the main function
 if __name__ == '__main__':
+	gpus = tensorflow.config.experimental.list_physical_devices('GPU')
+	print("------------"+str(len(tensorflow.config.experimental.list_physical_devices('CPU'))))
+	print("--------------"+str(len(gpus)))
+	if len(gpus) == 0:
+		gpus = tensorflow.config.experimental.list_physical_devices('CPU')
 	try:
+		tensorflow.config.experimental.set_virtual_device_configuration(gpus[0],
+		[tensorflow.config.experimental.VirtualDeviceConfiguration(memory_limit=2048)])
 		app.run(main)
-	except:
-		pass
+	except Exception as e:
+		raise e
