@@ -81,28 +81,6 @@ soon
 
 ## Implementation Details
 
-### Eager execution
-
-Great addition for existing Tensorflow experts.
-
-It is annoying when you accidentally use incompatible feature like
-`tf.config.experimental.set_memory_growth(devices[0], True)` or some sort of python 
-control flow that works fine eager mode.
-
-### models(x) vs model.predict(x)
-
-When calling `model(x)` directly, we are executing the graph in eager mode. For
-`model.predict`, tf actually compile the graph on the first run and then execute
-in graph mode. so if you are running the momdel once, `model(x)`, is faster since there is no compilation needed. Otherwise, `model.predict(x)` or using exported SavedModel graph is much faster (by x2). For no real-time usage, `model.predict_on_batch` is even faster as tested by @AnaRhisT94)
-
-### absl.py (abseil)
-
-Absolutely amazing. If you don't know already, absl.py is officially used by
-internal projects at Google. It standardizes application interface for Python
-and many other languages. After using it within Google, I was so excited
-to hear abseil going open source. It includes many decades of best practices
-learned from creating large size scalable applications. I literally have
-nothing bad to say about it, strongly recommend absl.py to everybody.
 
 ### Loading pre-trained Darknet weights
 
@@ -110,12 +88,6 @@ very hard with pure functional API because the layer ordering is different in
 tf.keras and darknet. The clean solution here is creating sub-models in keras.
 Keras is not able to save nested model in h5 format properly, TF Checkpoint is
 recommended since its offically supported by TensorFlow.
-
-### tf.keras.layers.BatchNormalization
-
-It doesn't work very well for transfer learning. There are many articles and
-github issues all over the internet. I used a simple hack to make it work nicer
-on transfer learning with small batches.
 
 ## Command Line Args Reference
 
