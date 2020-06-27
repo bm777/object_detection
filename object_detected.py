@@ -60,7 +60,7 @@ def main(_argv):
 		
 		t1 = time.time()
 		boxes, scores, classes, nums = yolo.predict(img_in)
-		for i in num:
+		for i in nums:
 			print(i)
 		t2 = time.time()
 		times.append(t2-t1)
@@ -77,7 +77,7 @@ def main(_argv):
 			break
 
 	vid.release()
-	cv2.destroyALlWindows()
+	cv2.destroyAllWindows()
 
 # the main function
 if __name__ == '__main__':
